@@ -1,0 +1,30 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Solar News</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_page_size_default">10</string>
+    <string name="settings_page_size_key">page_size</string>
+    <string name="settings_page_size_label">Results</string>
+    <string name="settings_order_by_default">newest</string>
+    <string name="settings_order_by_key">order_by</string>
+    <string name="settings_order_by_label">Order by</string>
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_newest_value">newest</string>
+    <string name="settings_order_by_oldest_value">oldest</string>
+    <string name="settings_order_by_relevance_value">relevance</string>
+    <string name="empty_state_default_text">Empty state default text.</string>
+    <string name="no_internet_connection">No internet connection.</string>
+    <string name="no_results_found">No results found.</string>
+    <string name="no_date_listed">No date listed</string>
+    <string name="settings_theme_label">Theme</string>
+    <string name="settings_theme_key">theme</string>
+    <string name="settings_theme_light_label">Light theme</string>
+    <string name="settings_theme_dark_label">Dark theme</string>
+    <string name="settings_theme_light_value">AppThemeLight</string>
+    <string name="settings_theme_dark_value">AppThemeDark</string>
+    <string name="settings_theme_default">AppThemeLight</string>
+    <string name="no_section_listed">No section listed</string>
+    <string name="share_message"><xliff:g id="currentNewsStoryTitle" example="Aeronaut on horseback sees rainbows">%s</xliff:g> <xliff:g id="currentNewsStoryUrl" example="https://www.theguardian.com/theguardian/1850/jul/14/fromthearchive">%s</xliff:g> via Solar News</string>
+</resources>

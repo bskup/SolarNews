@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="theme_dependent_calendar_icon" >@drawable/ic_calendar_black</item>
+        <item name="theme_dependent_clock_icon" >@drawable/ic_clock_black</item>
+    </style>
+
+    <!-- Dark theme. -->
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">#f5f5f5</item>
+        <item name="theme_dependent_calendar_icon" >@drawable/ic_calendar_white</item>
+        <item name="theme_dependent_clock_icon" >@drawable/ic_clock_white</item>
+    </style>
+
+</resources>
