@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     private ImageView mEmptyStateImageView;
     // Empty state image view and text linear layout
     private LinearLayout mEmptyStateLinearLayout;
+    // List view
+    private ListView mNewsStoryListView;
 
 
     @Override
@@ -65,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         setContentView(R.layout.activity_main);
 
         // Find the ListView, find its empty view components and set empty view
-        ListView newsStoryListView = (ListView) findViewById(R.id.list);
+        mNewsStoryListView = (ListView) findViewById(R.id.list);
         mEmptyStateLinearLayout = (LinearLayout) findViewById(R.id.empty_state_linear_layout);
         mEmptyStateImageView = (ImageView) findViewById(R.id.empty_state_image_view);
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_state_text_view);
-        newsStoryListView.setEmptyView(mEmptyStateLinearLayout);
+        mNewsStoryListView.setEmptyView(mEmptyStateLinearLayout);
 
         // Assign starting value to mAdapter
         mAdapter = new NewsStoryAdapter(this, new ArrayList<NewsStory>());
@@ -99,7 +101,9 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         } else {
             // Display network error (hide loading indicator and change empty state text)
             mSwipeRefreshLayout.setRefreshing(false);
+            mEmptyStateTextView.setVisibility(View.VISIBLE);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
+            mEmptyStateImageView.setVisibility(View.VISIBLE);
             mEmptyStateImageView.setImageResource(R.drawable.ic_no_internet);
         }
     }
@@ -169,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         // If there's no result, do nothing and inform user
         if (newsStoryList != null && !newsStoryList.isEmpty()) {
             hideEmptyStateLayout();
+            mNewsStoryListView.setVisibility(View.VISIBLE);
             updateUi(newsStoryList);
         } else if (newsStoryList != null && newsStoryList.isEmpty()){
             // Set empty state text view and image view to indicate no results
@@ -195,13 +200,13 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mAdapter.addAll(newsStoryList);
 
         // Find the ListView
-        ListView newsStoryListView = (ListView) findViewById(R.id.list);
+        mNewsStoryListView = (ListView) findViewById(R.id.list);
 
         // Set the adapter on the ListView
         // so the list can be populated in the ui
-        newsStoryListView.setAdapter(mAdapter);
+        mNewsStoryListView.setAdapter(mAdapter);
         // Make list view items do stuff when clicked
-        newsStoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mNewsStoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Do this stuff when list view item clicked
@@ -225,12 +230,16 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     // Restart the loader
     public void restartNewsLoader() {
+
         // Check network connection before initializing loader which
         // will attempt to connect to network to get Guardian data
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
+            // Hide empty state views first
+            mEmptyStateTextView.setVisibility(View.GONE);
+            mEmptyStateImageView.setVisibility(View.GONE);
             // Restart Loader
             getLoaderManager().restartLoader(NEWS_STORY_LOADER_ID, null, this);
             // Play the refreshing animation since we'll be attempting to fetch data
@@ -240,11 +249,14 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         } else {
             // Display network error (hide refreshing indicator and change empty state text)
+            mNewsStoryListView.setVisibility(View.GONE);
             mSwipeRefreshLayout.setRefreshing(false);
+            mEmptyStateLinearLayout.setVisibility(View.VISIBLE);
+            mEmptyStateTextView.setVisibility(View.VISIBLE);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
+            mEmptyStateImageView.setVisibility(View.VISIBLE);
             mEmptyStateImageView.setImageResource(R.drawable.ic_no_internet);
-            // Show toast indicating No internet connection
-            Toast.makeText(this, R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
+            Log.v(LOG_TAG, "aosdinoliahsfg");
         }
     }
 
